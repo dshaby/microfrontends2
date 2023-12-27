@@ -5,7 +5,7 @@ on: #what events are we watching for
     branches:
       - main
     paths: #only run this workflow when these files change inside container
-      - 'container/**'
+      - './container/**'
 
 defaults:
   run:
