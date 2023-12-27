@@ -1,7 +1,5 @@
 const { merge } = require('webpack-merge');
 // merges common config with dev config
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-// takes template html file and injects script tags
 const commonConfig = require('./webpack.common');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 // ModuleFederationPlugin is used to share code between projects
@@ -27,9 +25,6 @@ const devConfig = {
         marketing: 'marketing@http://localhost:8081/remoteEntry.js',
       },
       shared: packageJson.dependencies,
-    }),
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
     }),
   ],
 };
