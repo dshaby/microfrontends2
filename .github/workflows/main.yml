@@ -1,4 +1,4 @@
-name: deploy-container
+name: deploy-container-main
 
 on: #what events are we watching for
   push: #when we push to master
