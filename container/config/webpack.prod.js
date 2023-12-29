@@ -9,6 +9,10 @@ const prodConfig = {
   mode: 'production', //production mode will minify the code
   output: {
     filename: '[name].[contenthash].js', //Whenever we build files for prod, contenthash will change only when the content of the file changes, caching  //name is the name of the file
+    publicPath: '/container/latest/', //this is the path where the files will be stored in the s3 bucket
+    // this prepends the publicPath to the file name
+    // so the file name will be something like: /container/latest/main.my-hash.js
+    // instead of just main.my-hash.js
   },
   plugins: [
     new ModuleFederationPlugin({
