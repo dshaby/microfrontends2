@@ -1,7 +1,7 @@
 name: deploy-container
 
 on: #what events are we watching for
-  push: #when we push to master
+  push: #when we push to main
     branches:
       - main
     paths: #only run this workflow when these files change inside container
@@ -23,6 +23,8 @@ jobs:
       - uses: actions/checkout@v2 #checks out the repo
       - run: npm install
       - run: npm run build
+        env:
+          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }} #sets production domain
 
       - uses: shinyinc/action-aws-cli@v1.2 #uses aws cli
       - run: aws s3 sync dist s3://${{ secrets.AWS_BUCKET_NAME }}/container/latest #syncs dist folder to s3 bucket

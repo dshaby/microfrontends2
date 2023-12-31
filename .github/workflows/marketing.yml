@@ -1,0 +1,32 @@
+name: deploy-marketing
+
+on: #what events are we watching for
+  push: #when we push to main
+    branches:
+      - main
+    paths: #only run this workflow when these files change inside marketing
+      - 'marketing/**'
+
+defaults:
+  run:
+    working-directory: marketing #sets execution env to marketing directory
+
+jobs:
+  build:
+    runs-on: ubuntu-latest #runs on ubuntu
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: 'us-west-1'
+
+    steps:
+      - uses: actions/checkout@v2 #checks out the repo
+      - run: npm install
+      - run: npm run build
+
+      - uses: shinyinc/action-aws-cli@v1.2 #uses aws cli
+      - run: aws s3 sync dist s3://${{ secrets.AWS_BUCKET_NAME }}/marketing/latest #syncs dist folder to s3 bucket with all of marketing files
+      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/marketing/latest/index.html" #invalidates cloudfront cache
+      # when we run this command, we are telling cloudfront to invalidate the cache for the index.html file in the marketing/latest folder
+      # automatically, if the file name is the same, CloudFront will serve the cached version of the file
+      # by invalidating the cache, we are telling CloudFront to serve the new version of the file
