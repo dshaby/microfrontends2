@@ -26,3 +26,5 @@ jobs:
 
       - uses: shinyinc/action-aws-cli@v1.2 #uses aws cli
       - run: aws s3 sync dist s3://${{ secrets.AWS_BUCKET_NAME }}/container/latest #syncs dist folder to s3 bucket
+      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html" #invalidates cloudfront cache
+      # when we run this command, we are telling cloudfront to invalidate the cache for the index.html file in the container/latest folder
