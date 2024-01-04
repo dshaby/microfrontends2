@@ -11,7 +11,7 @@ const devConfig = {
   devServer: {
     port: 8080,
     historyApiFallback: {
-      index: 'index.html',
+      index: '/index.html',
     },
     // historyApiFallback is for when the user tries to go to a route that doesn't exist
   },
