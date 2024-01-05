@@ -8,6 +8,11 @@ const packageJson = require('../package.json');
 // development-specific config
 const devConfig = {
   mode: 'development',
+  output: {
+    publicPath: 'http://localhost:8080/',
+    // publicPath is where the files will be served from
+    // this is the base path used in development
+  },
   devServer: {
     port: 8080,
     historyApiFallback: {
