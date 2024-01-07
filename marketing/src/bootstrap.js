@@ -9,7 +9,13 @@ import { createMemoryHistory, createBrowserHistory } from 'history';
 // so that they can see the url change in the browser
 
 const mount = (el, { onNavigate, defaultHistory }) => {
-  const history = defaultHistory || createMemoryHistory();
+  const history =
+    defaultHistory ||
+    createMemoryHistory({
+      initialEntries: [window.location.pathname],
+      // window.location.pathname is the current pathname of the container app
+      // this is now the initial pathname for the child app
+    });
 
   if (onNavigate) {
     history.listen(onNavigate);
