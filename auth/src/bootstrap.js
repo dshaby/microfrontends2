@@ -8,7 +8,7 @@ import { createMemoryHistory, createBrowserHistory } from 'history';
 // createBrowserHistory allows developers in development mode to use the browser history object
 // so that they can see the url change in the browser
 
-const mount = (el, { onNavigate, defaultHistory }) => {
+const mount = (el, { onNavigate, defaultHistory, onSignIn }) => {
   const history =
     defaultHistory ||
     createMemoryHistory({
@@ -25,7 +25,7 @@ const mount = (el, { onNavigate, defaultHistory }) => {
   // and we will update the container's current pathname
   // with the new pathname
 
-  ReactDOM.render(<App history={history} />, el);
+  ReactDOM.render(<App onSignIn={onSignIn} history={history} />, el);
 
   return {
     onParentNavigate({ pathname: nextPathname }) {

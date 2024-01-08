@@ -12,13 +12,17 @@ const generateClassName = createGenerateClassName({
   //it adds the 'au' prefix to all the css class names
 });
 
-export default ({ history }) => {
+export default ({ history, onSignIn }) => {
   return (
     <Router history={history}>
       <StylesProvider generateClassName={generateClassName}>
         <Switch>
-          <Route path="/auth/signin" component={SignIn} />
-          <Route path="/auth/signup" component={SignUp} />
+          <Route path="/auth/signin">
+            <SignIn onSignIn={onSignIn} />
+          </Route>
+          <Route path="/auth/signup">
+            <SignUp onSignIn={onSignIn} />
+          </Route>
         </Switch>
       </StylesProvider>
     </Router>
