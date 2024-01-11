@@ -19,7 +19,8 @@ const prodConfig = {
       name: 'container', //this name is used to reference the remoteEntry.js file in index.html
       remotes: {
         marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`, //this name is used to reference the remoteEntry.js file in index.html
-        auth: `auth@${domain}/auth/latest/remoteEntry.js`, //this name is used to reference the remoteEntry.js file in index.html
+        auth: `auth@${domain}/auth/latest/remoteEntry.js`, //this name is used to reference the remoteEntry.js file in index.html\
+        dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`, //this name is used to reference the remoteEntry.js file in index.html
       },
       shared: packageJson.dependencies, //this will share all the dependencies of the package.json file
     }),
